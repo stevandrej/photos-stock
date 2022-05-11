@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from 'components/Header/Header';
+import Dashboard from 'pages/Dashboard/Dashboard';
+import Login from 'pages/Login/Login';
+import SingleView from 'pages/SingleView/SingleView';
+import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { checkLogin } from 'utils/checkLogin';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+	useEffect(() => {
+		setIsLoggedIn(checkLogin());
+	}, []);
+
+	return (
+		<>
+			<Header />
+
+			<Routes>
+				{!isLoggedIn ? (
+					<Route path="/" element={<Login />} />
+				) : (
+					<>
+						<Route path="/*" element={<Dashboard />} />
+						<Route path="/details/:id" element={<SingleView />} />
+					</>
+				)}
+			</Routes>
+		</>
+	);
 }
 
 export default App;

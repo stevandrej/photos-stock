@@ -1,0 +1,22 @@
+.btn {
+    display: flex;
+    padding: 2px 34px;
+    font-size: 1.6rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.primary {
+    color: #fff;
+    background-color: black;
+}
+
+.secondary {
+    background-color: #fff;
+    color: black;
+}
+
+.outlined {
+    border: 1px solid #fff;
+}
