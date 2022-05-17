@@ -1,0 +1,4 @@
+export const CREATE_ALBUM = 'CREATE_ALBUM';
+export const REMOVE_ALBUM = 'REMOVE_ALBUM';
+export const ADD_TO_ALBUM = 'ADD_TO_ALBUM';
+export const REMOVE_FROM_ALBUM = 'REMOVE_FROM_ALBUM';
