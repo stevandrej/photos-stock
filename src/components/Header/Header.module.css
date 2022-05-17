@@ -6,6 +6,7 @@
 	font-weight: 600;
 	font-size: 22px;
 	display: flex;
+	min-width: 1024px;
 }
 
 .headerContent {

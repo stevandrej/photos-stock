@@ -1,7 +1,7 @@
 import styles from './inputTextField.module.css';
 import PropTypes from 'prop-types';
 
-const InputTextField = ({ label, id, placeholder, ...props }) => {
+const InputTextField = ({ label, id, value, placeholder, ...props }) => {
 	return (
 		<div className={styles.formField}>
 			{label && (
@@ -14,6 +14,7 @@ const InputTextField = ({ label, id, placeholder, ...props }) => {
 				type="text"
 				placeholder={placeholder}
 				className={styles.fieldInput}
+				value={value}
 				{...props}
 			/>
 		</div>

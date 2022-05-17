@@ -1,5 +1,5 @@
-.container {
+.section {
     display: flex;
     flex-direction: column;
-    width: 1024px;
+    padding: 30px 0 30px 0;
 }

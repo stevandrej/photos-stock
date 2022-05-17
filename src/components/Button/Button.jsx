@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
+import { formatClasses } from 'utils/formatClasses';
 import styles from './button.module.css';
 
-const Button = ({ variant, outlined, className, ...props }) => {
+const Button = ({ variant='primary', outlined, className, ...props }) => {
+	let classes = [
+		styles.btn,
+		styles[variant],
+		outlined ? styles.outlined : null,
+		className ? className : null,
+	];
+
 	return (
-		<button
-			className={`
-				${styles.btn} 
-				${styles[variant]} 
-				${outlined && styles.outlined}
-				${className}
-			`}
-			{...props}
-		>
+		<button className={formatClasses(classes)} {...props}>
 			{props.children}
 		</button>
 	);
