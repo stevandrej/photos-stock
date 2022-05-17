@@ -1,12 +1,20 @@
+import Button from 'components/Button/Button';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getImageInfo } from './api/getImageInfo';
+import Container from 'components/Layout/Container/Container';
+import Row from 'components/Layout/Row/Row';
+import Section from 'components/Layout/Section/Section';
+import Modal from 'components/Modal/Modal';
+import AddToAlbum from 'components/AddToAlbum/AddToAlbum';
+import { baseUrl } from 'config/baseUrl';
 
 const SingleView = () => {
 	let navigate = useNavigate();
 	let { id } = useParams();
 	const [data, setData] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [modalOpen, setModalOpen] = useState(false);
 
 	useEffect(() => {
 		if (id) {
@@ -26,25 +34,53 @@ const SingleView = () => {
 		<div>Loading...</div>
 	) : data ? (
 		<>
-			<h2>{data.author}</h2>
-			<div>
-				<button>Add to Album</button>
-				<button>Download</button>
-			</div>
-			<div style={{ display: 'flex', justifyContent: 'center' }}>
-				<img
-					src={`${process.env.REACT_APP_BASEURL}/id/${id}/200/300`}
-					alt={data.author}
+			<Modal open={modalOpen} onClose={setModalOpen}>
+				<AddToAlbum
+					handleClose={() => {
+						setModalOpen(false);
+					}}
+					image={id}
 				/>
-			</div>
-			<div>Detailed info</div>
-			<button
-				onClick={() => {
-					navigate('/');
-				}}
-			>
-				Go Back
-			</button>
+			</Modal>
+			<Container alignMiddle>
+				<Section>
+					<Row style={{ gap: 30 }}>
+						<Button
+							variant="secondary"
+							onClick={() => {
+								setModalOpen(true);
+							}}
+						>
+							Add to Album +
+						</Button>
+						<Button variant="primary">Download</Button>
+					</Row>
+				</Section>
+				<Section component="main">
+					<Row>
+						<img
+							src={`${baseUrl}/id/${id}/1024/500`}
+							alt={data.author}
+						/>
+					</Row>
+				</Section>
+				<Section>
+					<Row justifyCenter>Uploaded by</Row>
+					<Row justifyCenter>
+						<h2>{data.author}</h2>
+					</Row>
+					<Row justifyCenter style={{ marginTop: 20 }}>
+						<Button
+							variant="secondary"
+							onClick={() => {
+								navigate('/');
+							}}
+						>
+							Go Back
+						</Button>
+					</Row>
+				</Section>
+			</Container>
 		</>
 	) : (
 		<div>No data...</div>
