@@ -96,6 +96,7 @@ const AddToAlbum = ({ handleClose, albumId, image, ...props }) => {
 					<InputTextField
 						id="album-name"
 						value={albumName}
+						placeholder="Enter title here"
 						onChange={(e) => {
 							setAlbumName(e.target.value);
 						}}
