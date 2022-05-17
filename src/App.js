@@ -1,4 +1,5 @@
 import Header from 'components/Header/Header';
+import Album from 'pages/Album/Album';
 import Dashboard from 'pages/Dashboard/Dashboard';
 import Login from 'pages/Login/Login';
 import SingleView from 'pages/SingleView/SingleView';
@@ -24,6 +25,7 @@ function App() {
 					<>
 						<Route path="/*" element={<Dashboard />} />
 						<Route path="/details/:id" element={<SingleView />} />
+						<Route path="/album/:id" element={<Album />} />
 					</>
 				)}
 			</Routes>
