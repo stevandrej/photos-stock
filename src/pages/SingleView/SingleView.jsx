@@ -30,6 +30,19 @@ const SingleView = () => {
 		}
 	}, [id]);
 
+	const handleDownload = async () => {
+		const imageUrl = await fetch(data.download_url);
+		const imageBlob = await imageUrl.blob();
+		const image = URL.createObjectURL(imageBlob);
+
+		const link = document.createElement('a');
+		link.href = image;
+		link.download = id;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+	};
+
 	return loading ? (
 		<div>Loading...</div>
 	) : data ? (
@@ -53,7 +66,9 @@ const SingleView = () => {
 						>
 							Add to Album +
 						</Button>
-						<Button variant="primary">Download</Button>
+						<Button variant="primary" onClick={handleDownload}>
+							Download
+						</Button>
 					</Row>
 				</Section>
 				<Section component="main">
@@ -69,7 +84,7 @@ const SingleView = () => {
 					<Row justifyCenter>
 						<h2>{data.author}</h2>
 					</Row>
-					<Row justifyCenter style={{ marginTop: 20 }}>
+					<Row justifyCenter style={{ marginTop: 20, gap: 20 }}>
 						<Button
 							variant="secondary"
 							onClick={() => {
